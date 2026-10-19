@@ -8,171 +8,235 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom CSS styling to make elements larger and highly accessible on mobile screens
+# Custom CSS styling for premium mobile UI and the interactive court layout
 st.markdown("""
     <style>
-    /* Make headers and text larger for readability under stress */
-    .big-font { font-size:24px !important; font-weight: bold; }
-    .emergency-box {
-        background-color: #FF4B4B;
+    /* Styling for mobile-friendly navigation tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+    .stTabs [data-baseweb="tab"] {
+        background-color: #f0f2f6;
+        border-radius: 20px;
+        padding: 8px 16px;
+        font-weight: bold;
+        color: #1e293b;
+        border: none;
+    }
+    .stTabs [aria-selected="true"] {
+        background-color: #1e3a8a !important;
+        color: white !important;
+    }
+    
+    /* Interactive Courtroom Map Styling */
+    .court-container {
+        background-color: #0f172a;
         padding: 20px;
-        border-radius: 10px;
-        color: white;
+        border-radius: 15px;
+        text-align: center;
         margin-bottom: 20px;
     }
-    .rights-card-red {
-        background-color: #D32F2F;
-        padding: 25px;
-        border-radius: 12px;
+    .court-bench {
+        background-color: #854d0e;
         color: white;
-        text-align: center;
-        margin-bottom: 15px;
+        padding: 15px;
+        border-radius: 8px;
         font-weight: bold;
+        font-size: 18px;
+        margin: 0 auto 15px auto;
+        width: 80%;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
-    .rights-card-blue {
-        background-color: #1976D2;
-        padding: 25px;
-        border-radius: 12px;
+    .court-middle {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 15px;
+        gap: 10px;
+    }
+    .court-box {
         color: white;
-        text-align: center;
-        margin-bottom: 15px;
+        padding: 12px;
+        border-radius: 8px;
         font-weight: bold;
+        font-size: 14px;
+        flex: 1;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
-    .rights-card-green {
-        background-color: #388E3C;
-        padding: 25px;
-        border-radius: 12px;
-        color: white;
-        text-align: center;
-        margin-bottom: 15px;
+    .prosecutor { background-color: #b91c1c; }
+    .interpreter { background-color: #1d4ed8; }
+    .child-podium {
+        background-color: #1e293b;
+        color: #38bdf8;
+        border: 2px dashed #38bdf8;
+        padding: 12px;
+        border-radius: 8px;
         font-weight: bold;
+        width: 50%;
+        margin: 0 auto;
     }
-    .wallet-card-border {
-        border: 3px dashed #000000;
+
+    /* Fixed Emergency Script Box */
+    .emergency-box {
+        background-color: #ea580c;
         padding: 20px;
-        background-color: #FFFFFF;
-        color: #000000;
-        border-radius: 5px;
+        border-radius: 12px;
+        color: white;
+        margin-top: 15px;
+        box-shadow: 0 4px 10px rgba(234,88,12,0.3);
+    }
+
+    /* Premium Flashcards for Tab 2 */
+    .rights-card {
+        padding: 25px;
+        border-radius: 16px;
+        color: white;
+        text-align: center;
+        margin-bottom: 15px;
+        font-weight: bold;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .card-red { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+    .card-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+    .card-green { background: linear-gradient(135deg, #22c55e, #15803d); }
+    
+    /* Wallet Card Border */
+    .wallet-card-border {
+        border: 3px dashed #0f172a;
+        padding: 20px;
+        background-color: #ffffff;
+        color: #0f172a;
+        border-radius: 8px;
     }
     </style>
     """, unsafe_markdown=True)
 
-# Main Application Title
+# Application Header
 st.title("🏛️ Amigo de la Corte")
-st.subheader("Guía de derechos y preparación legal para menores de edad")
+st.markdown("<p style='font-size:16px; color:#64748b; margin-top:-15px;'>Guía interactiva de preparación legal y derechos para menores de edad</p>", unsafe_markdown=True)
 
-# Setup Navigation Tabs
-tab1, tab2, tab3, tab4 = st.tabs(["🏛️ Mi Corte", "📣 Habla Por Mí", "🖨️ Tarjeta", "🤝 Recursos"])
+# Set up optimized layout tabs
+tab1, tab2, tab3, tab4 = st.tabs(["🏛️ Mi Corte", "📣 Habla Por Mí", "🖨️ Tarjeta de Bolsillo", "🤝 Recursos"])
 
 # ==========================================
-# TAB 1: MI CORTE (Courtroom Walkthrough)
+# TAB 1: MI CORTE (Interactive Walkthrough)
 # ==========================================
 with tab1:
-    st.markdown("### 🏛️ ¿Quién es quién en la Corte?")
-    st.write("Toca cada sección para entender el papel de cada persona en la sala del tribunal:")
+    st.markdown("### 🗺️ El Mapa de la Sala del Tribunal")
+    st.write("Presiona los botones de abajo para ver quién se sienta en cada lugar y qué hacen:")
     
-    with st.expander("⚖️ El Juez (The Judge)"):
-        st.write("**Español:** Es la persona que toma las decisiones sobre tu caso. Debes hablarle con respeto y llamarle 'Su Señoría' o 'Your Honor'.")
-        st.write("**English:** The person who makes decisions about your case. Speak respectfully and address them as 'Your Honor'.")
-        
-    with st.expander("💼 El Fiscal / Abogado del Gobierno (The Government Prosecutor)"):
-        st.write("**Español:** Es el abogado que representa al gobierno de EE.UU. Su trabajo es argumentar las leyes de inmigración. No es tu abogado personal y no debes tener miedo de mantener tu derecho a buscar defensa.")
-        st.write("**English:** The attorney representing the US government. They argue immigration law. They are not your personal lawyer.")
-        
-    with st.expander("🗣️ El Intérprete (The Interpreter)"):
-        st.write("**Español:** Es tu puente de comunicación. Traduce todo lo que dices al inglés, y todo lo que dice el juez al español. Si no entiendes al intérprete, díselo al juez inmediatamente.")
-        st.write("**English:** Your communication bridge. Translates your words to English, and the judge's words to Spanish. If you don't understand them, tell the judge.")
+    # Rendered Flat-Design Court Layout Map
+    st.markdown("""
+    <div class="court-container">
+        <div class="court-bench">⚖️ El Juez de Inmigración (Frontal)</div>
+        <div class="court-middle">
+            <div class="court-box prosecutor">💼 El Fiscal (Gobierno)</div>
+            <div class="court-box interpreter">🗣️ El Intérprete</div>
+        </div>
+        <div class="child-podium">👤 Tu Lugar (Podio)</div>
+    </div>
+    """, unsafe_markdown=True)
+    
+    # Interactive selection controls
+    role = st.radio("Selecciona una persona para aprender más:", ["⚖️ El Juez", "💼 El Fiscal / Abogado del Gobierno", "🗣️ El Intérprete"], horizontal=True)
+    
+    if role == "⚖️ El Juez":
+        st.info("**El Juez de Inmigración:** Es la persona encargada de decidir si puedes quedarte legalmente en los Estados Unidos. No trabaja para ICE y no es tu enemigo. Debes hablarle con total honestidad y llamarle **'Su Señoría'** o **'Your Honor'**.")
+    elif role == "💼 El Fiscal / Abogado del Gobierno":
+        st.error("**El Fiscal del Gobierno:** Es un abogado que representa los intereses del departamento de inmigración. Su tarea es presentar los argumentos legales ante las leyes de deportación. **No es tu defensor personal** y no tienes que responder preguntas difíciles sin asesoría.")
+    elif role == "🗣️ El Intérprete":
+        st.blueprint = st.success("**El Intérprete de la Corte:** Su único trabajo es traducir con absoluta precisión todo lo que dices al inglés, y todo lo que el juez dice al español. Si no entiendes alguna palabra o dialecto de tu intérprete, tienes el derecho de decírselo al juez de inmediato.")
 
-    st.markdown("---")
-    st.markdown("### 🚨 Frase de Emergencia para el Juez")
-    st.write("Si no tienes un abogado el día de tu audiencia, muestra esta pantalla o lee esta frase en voz alta inmediatamente cuando el juez te hable:")
+    st.markdown("### 🚨 Frase de Defensa si estás solo")
+    st.write("Si llegas al podio frente al juez y no tienes un abogado que te represente, muestra tu pantalla o lee este texto en voz alta palabra por palabra:")
     
     st.markdown("""
     <div class="emergency-box">
-        <p style="font-size:20px; font-weight:bold; margin-bottom:5px;">🇺🇸 READ THIS TO THE JUDGE / LEE ESTO AL JUEZ:</p>
-        <p style="font-size:22px; font-weight:bold; line-height:1.4;">
+        <p style="font-size:16px; margin:0; text-transform:uppercase; opacity:0.9; font-weight:bold;">🇺🇸 READ THIS ALOUD TO THE JUDGE / LEE ESTO AL JUEZ:</p>
+        <p style="font-size:22px; font-weight:bold; line-height:1.4; margin-top:5px;">
         "Hello Your Honor. My name is [Your Name]. I am a minor, I do not have a lawyer today, and I respectfully request a continuance so I can secure free legal representation."
         </p>
     </div>
     """, unsafe_markdown=True)
-    
-    st.markdown("**Significado en Español:** *'Hola Su Señoría. Mi nombre es [Tu Nombre]. Soy menor de edad, no tengo un abogado hoy, y solicito respetuosamente un aplazamiento para poder conseguir representación legal gratuita.'*")
+    st.markdown("**Traducción al Español:** *'Hola Su Señoría. Mi nombre es [Tu Nombre]. Soy menor de edad, no cuento con un abogado hoy, y solicito respetuosamente un aplazamiento para poder conseguir representación legal gratuita.'*")
 
 # ==========================================
-# TAB 2: HABLA POR MÍ (Field Rights Flashcards)
+# TAB 2: HABLA POR MÍ (Premium Flashcards)
 # ==========================================
 with tab2:
-    st.markdown("### 📣 Tarjetas de Derechos Visuales")
-    st.write("Si te encuentras con oficiales de ICE o de inmigración, puedes mostrar estas tarjetas directamente en la pantalla de tu teléfono:")
+    st.markdown("### 📣 Tarjetas de Derechos de Emergencia")
+    st.write("Si te interceptan agentes de ICE o la policía migratoria en la calle, mantén la calma y muestra estas tarjetas directamente en tu pantalla:")
     
     st.markdown("""
-    <div class="rights-card-red">
-        <p style="font-size:16px; margin:0; text-transform:uppercase;">🔴 Muestra esto para guardar silencio:</p>
-        <p style="font-size:24px; margin:5px 0 0 0;">"I am exercising my right to remain silent until I speak to a lawyer."</p>
+    <div class="rights-card card-red">
+        <p style="font-size:14px; margin:0; text-transform:uppercase; opacity:0.8;">🔴 DERECHO A GUARDAR SILENCIO / RIGHT TO SILENCE</p>
+        <p style="font-size:24px; margin:8px 0 0 0; line-height:1.3;">"I am exercising my constitutional right to remain silent until I speak to a lawyer."</p>
     </div>
     """, unsafe_markdown=True)
     
     st.markdown("""
-    <div class="rights-card-blue">
-        <p style="font-size:16px; margin:0; text-transform:uppercase;">🔵 Muestra esto si necesitas traducción:</p>
-        <p style="font-size:24px; margin:5px 0 0 0;">"I require a Spanish interpreter. I do not understand English well enough."</p>
+    <div class="rights-card card-blue">
+        <p style="font-size:14px; margin:0; text-transform:uppercase; opacity:0.8;">🔵 DERECHO A TRADUCCIÓN / INTERPRETER REQUEST</p>
+        <p style="font-size:24px; margin:8px 0 0 0; line-height:1.3;">"I require a Spanish interpreter. I do not understand English well enough."</p>
     </div>
     """, unsafe_markdown=True)
     
     st.markdown("""
-    <div class="rights-card-green">
-        <p style="font-size:16px; margin:0; text-transform:uppercase;">🟢 Muestra esto para llamar a tu tutor:</p>
-        <p style="font-size:24px; margin:5px 0 0 0;">"Please allow me to call my adult sponsor immediately."</p>
+    <div class="rights-card card-green">
+        <p style="font-size:14px; margin:0; text-transform:uppercase; opacity:0.8;">🟢 CONTACTAR UN TUTOR / ADULT SPONSOR</p>
+        <p style="font-size:24px; margin:8px 0 0 0; line-height:1.3;">"Please allow me to call my adult sponsor immediately."</p>
     </div>
     """, unsafe_markdown=True)
 
 # ==========================================
-# TAB 3: TARJETA DE BOLSILLO (Printable Card)
+# TAB 3: TARJETA DE BOLSILLO (Backup Copy)
 # ==========================================
 with tab3:
-    st.markdown("### 🖨️ Tu Tarjeta Física de Respaldo")
-    st.write("Toma una captura de pantalla (screenshot) de este cuadro o imprime esta sección. Si los oficiales te quitan el teléfono, mantén este papel guardado en tu bolsillo:")
+    st.markdown("### 🖨️ Respaldo Físico Imprimible")
+    st.write("Toma una captura de pantalla (screenshot) de este cuadro o usa el menú de tu navegador para imprimir esta página. Guarda el papel doblado en tu bolsillo por si te confiscan el celular:")
     
     st.markdown("""
     <div class="wallet-card-border">
-        <p style="text-align:center; font-weight:bold; font-size:18px; margin-top:0;">AMIGO DE LA CORTE - TARGETA DE DERECHOS</p>
-        <hr style="border-top:1px solid black; margin:10px 0;">
-        <p style="font-size:15px; font-weight:bold; margin-bottom:2px;">🏛️ FOR THE JUDGE / PARA EL JUEZ:</p>
-        <p style="font-size:14px; font-style:italic; margin-top:0;">"Hello Your Honor. My name is a minor. I do not have a lawyer today, and I respectfully request a continuance so I can secure free legal representation."</p>
-        <hr style="border-top:1px dashed gray; margin:10px 0;">
-        <p style="font-size:15px; font-weight:bold; margin-bottom:2px;">🚨 FOR ICE / PARA ENCUENTROS CON ICE:</p>
-        <p style="font-size:14px; font-style:italic; margin-top:0; margin-bottom:4px;">1. "I am exercising my right to remain silent until I speak to a lawyer."</p>
-        <p style="font-size:14px; font-style:italic; margin-top:0; margin-bottom:4px;">2. "I require a Spanish interpreter. I do not understand English well."</p>
-        <p style="font-size:14px; font-style:italic; margin-top:0;">3. "Please allow me to call my adult sponsor immediately."</p>
+        <p style="text-align:center; font-weight:bold; font-size:16px; margin-top:0; color:#0f172a;">AMIGO DE LA CORTE - TARJETA DE BOLSILLO</p>
+        <hr style="border-top:2px solid #0f172a; margin:10px 0;">
+        <p style="font-size:14px; font-weight:bold; margin-bottom:2px; color:#0f172a;">🏛️ COURT SCRIPT / SCRIPT PARA LA CORTE:</p>
+        <p style="font-size:13px; font-style:italic; margin-top:0; color:#1e293b;">"Hello Your Honor. My name is a minor. I do not have a lawyer today, and I respectfully request a continuance so I can secure free legal representation."</p>
+        <hr style="border-top:1px dashed #64748b; margin:10px 0;">
+        <p style="font-size:14px; font-weight:bold; margin-bottom:2px; color:#0f172a;">🚨 FIELD ENCOUNTERS / PARA ENCUENTROS CON ICE:</p>
+        <p style="font-size:13px; font-style:italic; margin-top:0; margin-bottom:4px; color:#1e293b;">1. "I am exercising my right to remain silent until I speak to a lawyer."</p>
+        <p style="font-size:13px; font-style:italic; margin-top:0; margin-bottom:4px; color:#1e293b;">2. "I require a Spanish interpreter. I do not understand English well."</p>
+        <p style="font-size:13px; font-style:italic; margin-top:0; color:#1e293b;">3. "Please allow me to call my adult sponsor immediately."</p>
     </div>
     """, unsafe_markdown=True)
 
 # ==========================================
-# TAB 4: RECURSOS (Houston Directory Links)
+# TAB 4: RECURSOS (Houston Direct Dial Links)
 # ==========================================
 with tab4:
-    st.markdown("### 🤝 Ayuda Legal Gratuita en Houston")
-    st.write("Toca los botones para llamar directamente desde tu teléfono celular:")
+    st.markdown("### 🤝 Directorio de Ayuda Gratuita en Houston, TX")
+    st.write("Presiona los botones inferiores para llamar directamente de forma gratuita:")
     
-    st.markdown("#### ⚖️ Defensa Legal de Menores")
-    st.link_button("📞 Llamar a KIND Houston (832-779-4340)", "tel:8327794340")
-    st.write("*Organización especializada en la representación gratuita de niños no acompañados ante la corte.*")
-    
-    st.markdown("#### ✊ Apoyo Comunitario y Juvenil")
-    st.link_button("📞 Llamar a FIEL Houston (713-364-3435)", "tel:7133643435")
-    st.write("*Movimiento liderado por jóvenes inmigrantes enfocado en la organización, orientación y recursos familiares.*")
-    
-    st.markdown("#### 🛡️ Servicios Integrales de Inmigración")
-    st.link_button("📞 Llamar a RAICES Texas (210-222-0960)", "tel:2102220960")
-    st.write("*Defensa legal gratuita y de bajo costo para niños, familias y refugiados en todo el estado de Texas.*")
+    st.markdown("#### ⚖️ KIND Houston")
+    st.link_button("📞 Llamar a KIND (832-779-4340)", "tel:8327794340")
+    st.caption("Especialistas en proveer abogados gratuitos para niños no acompañados frente a audiencias migratorias.")
+    st.markdown("#### ✊ FIEL Houston")
+    st.link_button("📞 Llamar a FIEL (713-364-3435)", "tel:7133643435")
+    st.caption("Organización comunitaria liderada por jóvenes inmigrantes dedicada a la orientación familiar y defensa de derechos.")
+    st.markdown("#### 🛡️ RAICES Texas")
+    st.link_button("📞 Llamar a RAICES (210-222-0960)", "tel:2102220960")
+    st.caption("Servicios legales gratuitos y de representación migratoria holística en todo el territorio de Texas.")
 
-# ==========================================
-# FOOTER: PRIVACY & LEGAL DISCLAIMER
-# ==========================================
+
+==========================================
+
+
+FOOTER: PRIVACY PROFILE
+
+
+==========================================
+
 st.markdown("---")
 st.caption("""
-🔒 **Seguridad y Privacidad Absoluta / Data Privacy Profile:** 
-Esta aplicación es una herramienta puramente informativa y educativa. NO recopila, NO almacena y NO transmite ningún tipo de información personal, cookies, nombres ni ubicaciones de los usuarios. Todo lo que ves se ejecuta de forma totalmente privada dentro de la memoria de tu teléfono.
-
-This application is an educational tool and does not constitute formal legal advice. It collects ABSOLUTELY ZERO user data, names, or server-side logs to protect vulnerable communities.
+🔒 Perfil de Privacidad Absoluta / Data Privacy Shield:
+Esta plataforma es estrictamente informativa. NO recopila direcciones IP, NO almacena cookies, NO guarda nombres ni envía datos a servidores externos. Todo el código se procesa localmente en la memoria del navegador de tu teléfono.
+This app is an educational system and does not constitute formal legal advice. It tracks and stores ABSOLUTELY ZERO client metrics, ensuring safety for the community.
 """)
