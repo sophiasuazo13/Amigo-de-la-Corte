@@ -68,6 +68,23 @@ html("""
 .stApp {background: linear-gradient(180deg, #eef2ff 0%, #f8fafc 40%);}
 .stApp, .stApp p, .stApp li, .stApp label, .stApp span {color: #0f172a;}
 
+/* Fix native Streamlit alert boxes (st.info, st.warning, st.success, st.error) */
+[data-testid="stAlert"], [data-testid="stAlertContainer"], div[role="alert"] {
+    background-color: #ffffff !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 14px !important;
+    color: #0f172a !important;
+}
+[data-testid="stAlert"] *, div[role="alert"] * {
+    color: #0f172a !important;
+}
+
+/* Fix any other native dark containers (expanders, popovers, code/text boxes) */
+[data-testid="stExpander"], [data-testid="stForm"], [data-baseweb="base-input"], textarea, input {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+}
+
 /* ================================================================
    RESPONSIVE DEVICE FRAMING
    ================================================================ */
