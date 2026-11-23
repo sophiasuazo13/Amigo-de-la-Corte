@@ -272,38 +272,32 @@ div[role="radiogroup"] p {font-weight: 800; font-size: 13.5px; margin: 0; white-
 .iv-circle .hs-dot {position:absolute; left:64px; top:80px; width:8px; height:8px; border-radius:50%; background:#FF9F68;}
 
 /* ---------- floating bottom dock ---------- */
+/* ---------- floating bottom dock ---------- */
+.st-key-dock {
+  position: fixed !important; bottom: 10px !important; left: 50% !important; transform: translateX(-50%) !important; z-index: 9999 !important;
+  width: min(480px, calc(100% - 16px)) !important; box-sizing: border-box !important; padding: 8px 6px !important;
+  background: linear-gradient(135deg, #9B8AFB, #6A4DE0 70%, #5B43E6) !important; border-radius: 30px !important;
+  box-shadow: 0 -4px 24px rgba(123,97,255,0.25), 0 18px 36px rgba(91,67,230,0.45), inset 0 3px 5px rgba(255,255,255,0.45), inset 0 -5px 8px rgba(40,20,140,0.35) !important;
+  backdrop-filter: blur(10px) !important; overflow: visible !important;
+}
+@media (max-width: 600px) {
+  .st-key-dock {bottom: 0 !important; width: 100% !important; border-radius: 26px 26px 0 0 !important; padding-bottom: calc(8px + env(safe-area-inset-bottom)) !important;}
+}
+.st-key-dock [data-testid="stHorizontalBlock"] {flex-wrap: nowrap !important; gap: 0.1rem !important; align-items: center !important; overflow: visible !important;}
+.st-key-dock [data-testid="stColumn"], .st-key-dock [data-testid="column"] {min-width: 0 !important; flex: 1 1 0 !important; width: auto !important; overflow: visible !important;}
+.st-key-dock .stButton {display:flex !important; justify-content:center !important;}
 .st-key-dock .stButton > button {
   background: transparent !important; border: none !important; box-shadow: none !important; color:#ffffff !important;
-  padding: 8px 4px !important; min-height: 0 !important; border-radius: 18px !important; font-size: 13px !important; line-height: 1.2 !important; width: 100%;
+  padding: 8px 4px !important; min-height: 0 !important; border-radius: 18px !important; font-size: 13px !important; line-height: 1.2 !important; width: 100% !important;
 }
 .st-key-dock .stButton > button p {margin: 0 !important; color:#ffffff !important; font-weight: 800 !important; font-size: 13px !important; white-space: nowrap !important;}
-.st-key-dock .stButton > button:hover {transform:none; background: rgba(255,255,255,0.14) !important;}
+.st-key-dock .stButton > button:hover {transform:none !important; background: rgba(255,255,255,0.14) !important;}
 .st-key-nav_center .stButton > button {
   width: 64px !important; height: 64px !important; border-radius: 50% !important; margin-top: -28px !important; padding: 0 !important;
   background: linear-gradient(135deg, #5CE1E6, #38B2AC) !important; color: #ffffff !important; border: none !important; outline: none !important;
   box-shadow: 0 0 0 5px rgba(92,225,230,0.28), 0 12px 24px rgba(56,178,172,0.6), inset 0 3px 6px rgba(255,255,255,0.75), inset 0 -4px 8px rgba(0,0,0,0.14) !important;
 }
 .st-key-nav_center .stButton > button p {font-size: 13.5px !important; color: #ffffff !important; font-weight: 900 !important;}
-
-@media (max-width: 600px) {
-  .st-key-dock {bottom: 0; width: 100%; border-radius: 26px 26px 0 0; padding-bottom: calc(8px + env(safe-area-inset-bottom));}
-}
-.st-key-dock [data-testid="stHorizontalBlock"] {flex-wrap: nowrap !important; gap: 0.1rem !important; align-items: center !important; overflow: visible !important;}
-.st-key-dock [data-testid="stColumn"], .st-key-dock [data-testid="column"] {min-width: 0 !important; flex: 1 1 0 !important; width: auto !important; overflow: visible !important;}
-.st-key-dock .stButton {display:flex; justify-content:center;}
-.st-key-dock .stButton > button {
-  background: transparent !important; border: none !important; box-shadow: none !important; color:#ffffff !important;
-  padding: 5px 2px !important; min-height: 0 !important; border-radius: 18px !important; font-size: 10.5px; line-height: 1.15; width: 100%;
-}
-.st-key-dock .stButton > button p {margin: 0 !important; color:#ffffff !important; font-weight: 800; white-space: nowrap;}
-.st-key-dock .stButton > button p:first-child {font-size: 21px; line-height: 1.2;}
-.st-key-dock .stButton > button:hover {transform:none; background: rgba(255,255,255,0.12) !important;}
-.st-key-nav_center .stButton > button {
-  width: 62px !important; height: 62px !important; border-radius: 50% !important; margin-top: -34px !important; padding: 0 !important;
-  background: linear-gradient(135deg, #5CE1E6, #38B2AC) !important;
-  box-shadow: 0 0 0 6px rgba(92,225,230,0.28), 0 12px 24px rgba(56,178,172,0.6), inset 0 3px 6px rgba(255,255,255,0.75), inset 0 -4px 8px rgba(0,0,0,0.14) !important;
-}
-.st-key-nav_center .stButton > button p:first-child {font-size: 28px;}
 
 @media print {
   .st-key-dock, [data-testid="stRadio"], .app-top {display:none !important;}
