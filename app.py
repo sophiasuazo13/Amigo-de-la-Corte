@@ -292,12 +292,12 @@ div[role="radiogroup"] p {font-weight: 800; font-size: 13.5px; margin: 0; white-
 }
 .st-key-dock .stButton > button p {margin: 0 !important; color:#ffffff !important; font-weight: 800 !important; font-size: 13px !important; white-space: nowrap !important;}
 .st-key-dock .stButton > button:hover {transform:none !important; background: rgba(255,255,255,0.14) !important;}
-.st-key-nav_center button, .st-key-nav_center [data-testid^="baseButton"] {
-  width: 64px !important; height: 64px !important; min-width: 64px !important; border-radius: 50% !important; margin-top: -28px !important; padding: 0 !important;
-  background: linear-gradient(135deg, #5CE1E6, #38B2AC) !important; color: #ffffff !important; border: none !important; outline: none !important;
-  box-shadow: 0 0 0 5px rgba(92,225,230,0.28), 0 12px 24px rgba(56,178,172,0.6), inset 0 3px 6px rgba(255,255,255,0.75), inset 0 -4px 8px rgba(0,0,0,0.14) !important;
+.st-key-nav_center .stButton > button {
+  width: 64px !important; height: 64px !important; min-width: 64px !important; border-radius: 50% !important; margin-top: -32px !important; padding: 0 !important;
+  background: linear-gradient(135deg, #5CE1E6, #38B2AC) !important; color: #ffffff !important; border: none !important;
+  box-shadow: 0 0 0 6px rgba(92,225,230,0.28), 0 12px 24px rgba(56,178,172,0.6), inset 0 3px 6px rgba(255,255,255,0.75), inset 0 -4px 8px rgba(0,0,0,0.14) !important;
 }
-.st-key-nav_center button p, .st-key-nav_center [data-testid^="baseButton"] p {
+.st-key-nav_center .stButton > button p {
   font-size: 35px !important; line-height: 1 !important; color: #ffffff !important; margin: 0 !important;
 }
 
