@@ -1217,8 +1217,8 @@ with st.container(key="dock"):
         st.button(X("Inicio", "Home"), key="nav_home", on_click=go, args=("home",))
     with cols[1]:
         st.button(X("Preguntas", "Q&A"), key="nav_qa", on_click=go, args=("qa",))
-    with cols[2]:
-        st.button(X("Guión", "Script"), key="nav_center", on_click=go, args=("script",),
+     with cols[2]:
+        st.button("🗣️", key="nav_center", on_click=go, args=("script",),
                   help=X("Guión de Corte y audio", "Court Script & audio coach"))
     with cols[3]:
         st.button(X("Alivio", "Relief"), key="nav_relief", on_click=go, args=("relief",))
