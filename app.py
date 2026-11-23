@@ -15,7 +15,6 @@ APP_NAME = "Amigo de la Corte"  # change to "Amiga de la Corte" here if you pref
 
 st.set_page_config(
     page_title=APP_NAME,
-    page_icon="🏛️",
     layout="centered",
     initial_sidebar_state="collapsed",
 )
@@ -317,11 +316,43 @@ else:
 # HEADER + TOGGLES
 # ------------------------------------------------------------------
 html(f"""
+<link href="https://googleapis.com" rel="stylesheet">
+<style>
+  .app-top {{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+    padding: 10px 8px 14px;
+  }}
+  .app-title {{
+    font-family: 'Shrikhand', cursive;
+    font-size: 2.15rem;
+    line-height: 1.08;
+    color: #5e43f3;
+    letter-spacing: 0.01em;
+    text-shadow: 
+      2px 2px 0px #ffffff,
+      4px 4px 0px #24b3a8,
+      6px 6px 12px rgba(45, 42, 102, 0.18);
+    margin: 0;
+  }}
+  .badge {{
+    background: #e6e9ff;
+    color: #3928a8;
+    font-size: 0.74rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }}
+</style>
 <div class="app-top">
-<p class="app-title">🏛️ {APP_NAME}</p>
-<span class="badge">{X("📘 Solo educativo · No es asesoría legal", "📘 Educational only · Not legal advice")}</span>
+  <h1 class="app-title">{APP_NAME}</h1>
+  <span class="badge">{X("Solo educativo · No es asesoría legal", "Educational only · Not legal advice")}</span>
 </div>
 """)
+
 
 st.radio(
     "Idioma / Language",
@@ -334,8 +365,8 @@ st.radio(
     "Modo / Mode",
     ["kid", "adult"],
     format_func=lambda m: (
-        ("🧒 Modo Niño" if m == "kid" else "🧑 Modo Adulto") if lang == "es"
-        else ("🧒 Child Mode" if m == "kid" else "🧑 Parent Mode")
+        ("Modo Niño" if m == "kid" else "Modo Adulto") if lang == "es"
+        else ("Child Mode" if m == "kid" else "Parent Mode")
     ),
     horizontal=True, label_visibility="collapsed", key="mode",
 )
@@ -429,28 +460,28 @@ ROLES = {
     },
     "fiscal": {
         "css": "coral",
-        "title": X("💼 El Fiscal", "💼 The Government Lawyer"),
+        "title": X("El Fiscal", "The Government Lawyer"),
         "text": S(
             "El fiscal es un abogado que trabaja para el gobierno. Habla con el juez sobre las reglas de inmigración. No es tu abogado, solo hace su trabajo. "
-            "No tienes que contestar sola o solo si te da miedo; puedes decir que quieres un abogado. 🌟",
+            "No tienes que contestar sola o solo si te da miedo; puedes decir que quieres un abogado. ",
             "El fiscal (abogado del gobierno, de la oficina legal de ICE) representa al gobierno en el caso. No es su abogado ni lo defiende. "
             "Puede hacer preguntas, y usted puede pedir hablar con un abogado antes de contestar preguntas importantes.",
             "The government lawyer works for the government and talks to the judge about immigration rules. They are not your lawyer; they are just doing their job. "
-            "You don't have to answer alone if you feel scared. You can say you want a lawyer. 🌟",
+            "You don't have to answer alone if you feel scared. You can say you want a lawyer. ",
             "The government attorney (a trial attorney with ICE's legal office) represents the government in the case. They are not your lawyer and do not defend you. "
             "They may ask questions, and you may ask to talk to a lawyer before answering important questions.",
         ),
     },
     "interprete": {
         "css": "mint",
-        "title": X("🗣️ El Intérprete", "🗣️ The Interpreter"),
+        "title": X("El Intérprete", "The Interpreter"),
         "text": S(
             "El intérprete es un ayudante que cambia las palabras de inglés a español y de español a inglés, para que entiendas todo y el juez te entienda a ti. "
-            "Si no entiendes una palabra, levanta la mano y dilo. Nadie se va a enojar. 🤗",
+            "Si no entiendes una palabra, levanta la mano y dilo. Nadie se va a enojar.",
             "El intérprete traduce al español todo lo que se dice en la audiencia y al inglés lo que usted dice. Si no comprende la traducción o el dialecto, "
             "avise al juez de inmediato.",
             "The interpreter is a helper who changes the words from English to Spanish and from Spanish to English, so you understand everything and the judge understands you. "
-            "If you don't understand a word, raise your hand and say so. Nobody will be upset. 🤗",
+            "If you don't understand a word, raise your hand and say so. Nobody will be upset.",
             "The interpreter translates everything said in the hearing into Spanish and translates what you say into English. "
             "If you do not understand the interpretation or the dialect, tell the judge right away.",
         ),
@@ -460,62 +491,62 @@ ROLES = {
 # Courtroom phrases. English is intentional: it is meant to be said to an official.
 PHRASES = [
     {
-        "g": "g-coral", "icon": "🤫",
+        "g": "g-coral", 
         "tag": X("DERECHO A GUARDAR SILENCIO", "RIGHT TO SILENCE"),
         "en": "I am exercising my constitutional right to remain silent until I speak to a lawyer.",
         "phon": "Ai am ék-ser-sai-sing mai kons-ti-tú-shio-nal rait tu ri-méin sái-lent ón-til ai spik tu a ló-ier.",
         "note": S(
-            "Significa: «Quiero quedarme callado o callada hasta hablar con un abogado». Respira hondo. 💙",
+            "Significa: «Quiero quedarme callado o callada hasta hablar con un abogado». Respira hondo.",
             "Puede negarse a contestar preguntas y pedir un abogado. No firme ningún documento sin antes hablar con un abogado. Nunca presente documentos falsos.",
-            "This means: “I want to stay quiet until I talk to a lawyer.” Take a deep breath. 💙",
+            "This means: “I want to stay quiet until I talk to a lawyer.” Take a deep breath.",
             "You may decline to answer questions and ask for a lawyer. Do not sign any document before speaking with a lawyer. Never present false documents.",
         ),
     },
     {
-        "g": "g-mint", "icon": "🗣️",
+        "g": "g-mint", 
         "tag": X("PEDIR INTÉRPRETE", "INTERPRETER REQUEST"),
         "en": "I require a Spanish interpreter. I do not understand English well enough.",
         "phon": "Ai ri-cuái-er a Spá-nish in-tér-pre-ter. Ai du not an-der-stánd Ín-glish uel i-nóf.",
         "note": S(
-            "Significa: «Necesito a alguien que hable español para entender». Está bien pedir ayuda. 🌈",
+            "Significa: «Necesito a alguien que hable español para entender». Está bien pedir ayuda.",
             "Solicite un intérprete antes de responder preguntas o firmar algo. Si no entiende, es mejor decirlo que adivinar.",
-            "This means: “I need someone who speaks Spanish so I can understand.” It is okay to ask for help. 🌈",
+            "This means: “I need someone who speaks Spanish so I can understand.” It is okay to ask for help.",
             "Ask for an interpreter before answering questions or signing anything. If you don't understand, it is better to say so than to guess.",
         ),
     },
     {
-        "g": "g-ind", "icon": "🙋",
+        "g": "g-ind", 
         "tag": X("SI NO ENTIENDES", "IF YOU DON'T UNDERSTAND"),
         "en": "I did not understand. Can you explain it again, please?",
         "phon": "Ai did not an-der-stánd. Kan yu ex-pléin it a-guén, plis?",
         "note": S(
-            "Significa: «No entendí. ¿Me lo puede explicar otra vez, por favor?». Nadie se enoja. 🤗",
+            "Significa: «No entendí. ¿Me lo puede explicar otra vez, por favor?». Nadie se enoja.",
             "Pedir que se repita o se aclare una pregunta es siempre apropiado en una audiencia.",
-            "This means: “I didn't understand. Can you say it again, please?” Nobody gets mad. 🤗",
+            "This means: “I didn't understand. Can you say it again, please?” Nobody gets mad. ",
             "Asking for a question to be repeated or clarified is always appropriate in a hearing.",
         ),
     },
     {
-        "g": "g-plum", "icon": "📞",
+        "g": "g-plum", 
         "tag": X("LLAMAR A MI ADULTO DE CONFIANZA", "CALL MY TRUSTED ADULT"),
         "en": "Please allow me to call my adult sponsor immediately.",
         "phon": "Plis a-láu mi tu col mai á-dolt spón-sor i-mí-diat-li.",
         "note": S(
-            "Significa: «Por favor, déjeme llamar a mi adulto de confianza». Tu familia o patrocinador quiere ayudarte. 🏡",
+            "Significa: «Por favor, déjeme llamar a mi adulto de confianza». Tu familia o patrocinador quiere ayudarte.",
             "Pida comunicarse con el patrocinador o tutor. Lleve los números importantes anotados en papel, por si le quitan el celular.",
-            "This means: “Please let me call my trusted adult.” Your family or sponsor wants to help you. 🏡",
+            "This means: “Please let me call my trusted adult.” Your family or sponsor wants to help you.",
             "Ask to contact the sponsor or guardian. Carry important numbers written on paper in case the phone is taken.",
         ),
     },
     {
-        "g": "g-ind", "icon": "🚪",
+        "g": "g-ind", 
         "tag": X("EN LA PUERTA", "AT THE DOOR"),
         "en": "I do not consent to entry unless you have a warrant signed by a judge.",
         "phon": "Ai du not kon-sént tu én-tri an-lés yu jav a uó-rant saind bai a yadch.",
         "note": S(
-            "Si tocan a la puerta y estás con un adulto, deja que el adulto hable. No tienes que abrir tú solo o sola. 🧸",
+            "Si tocan a la puerta y estás con un adulto, deja que el adulto hable. No tienes que abrir tú solo o sola. ",
             "Una orden administrativa de ICE (formularios I-200 o I-205) no autoriza a entrar a su casa. Solo una orden firmada por un juez lo permite. Puede pedir que se la muestren sin abrir la puerta.",
-            "If someone knocks and you are with an adult, let the adult do the talking. You don't have to open the door alone. 🧸",
+            "If someone knocks and you are with an adult, let the adult do the talking. You don't have to open the door alone. ",
             "An ICE administrative warrant (forms I-200 or I-205) does not authorize entry into your home. Only a warrant signed by a judge does. You may ask them to show it without opening the door.",
         ),
     },
@@ -528,18 +559,18 @@ CONT_PHON = "Yor Ó-nor, ai am a mái-nor and ai ris-péct-ful-li ask for a kon-
 CHECKLIST = {
     "es": {
         "kid": [
-            ("🌙 Antes de tu cita", [
+            ("Antes de tu cita", [
                 "Pregunta a tu adulto de confianza: ¿cuándo y dónde es mi cita?",
-                "Pídele que te ayude a buscar un abogado (mira la pestaña Ayuda). 💛",
+                "Pídele que te ayude a buscar un abogado (mira la pestaña Ayuda).",
                 "Escribe en un papel el número de tu adulto de confianza.",
                 "Dile lo que te da miedo. Es normal tener preguntas.",
             ]),
-            ("🎒 La noche anterior", [
+            ("La noche anterior", [
                 "Alista ropa limpia y cómoda.",
                 "Guarda tu tarjeta de bolsillo y tus papeles en la mochila.",
-                "Descansa. Puedes abrazar tu peluche. 🧸",
+                "Descansa. Puedes abrazar tu peluche.",
             ]),
-            ("🏛️ El día de la cita", [
+            ("El día de la cita", [
                 "Llega temprano con tu adulto. Hay una revisión de seguridad.",
                 "Pon tu celular en silencio.",
                 "Si no entiendes algo, di: «No entendí, por favor».",
@@ -548,7 +579,7 @@ CHECKLIST = {
             ]),
         ],
         "adult": [
-            ("📄 Antes de la audiencia", [
+            ("Antes de la audiencia", [
                 "Revise su aviso: fecha, hora, dirección o instrucciones para la audiencia en línea.",
                 "Confirme su caso en acis.eoir.justice.gov o al 1-800-898-7180.",
                 "Contacte hoy a organizaciones de ayuda legal (pestaña Ayuda); las listas de espera se llenan rápido.",
@@ -556,12 +587,12 @@ CHECKLIST = {
                 "Reúna documentos: aviso de audiencia, identificaciones, actas de nacimiento y datos de contacto.",
                 "Anote en papel los teléfonos del patrocinador y de la organización legal.",
             ]),
-            ("🎒 El día anterior", [
+            ("El día anterior", [
                 "Planifique el transporte (o pruebe la conexión si es en línea) y pida permiso en el trabajo o la escuela.",
                 "Prepare ropa limpia y presentable.",
                 "Imprima o guarde la tarjeta de bolsillo.",
             ]),
-            ("🏛️ El día de la audiencia", [
+            ("El día de la audiencia", [
                 "Llegue con tiempo: hay revisión de seguridad. Si es en línea, entre a tiempo.",
                 "Silencie los celulares.",
                 "Pida un intérprete si lo necesita.",
@@ -573,18 +604,18 @@ CHECKLIST = {
     },
     "en": {
         "kid": [
-            ("🌙 Before your court date", [
+            ("Before your court date", [
                 "Ask your trusted adult: when and where is my court date?",
-                "Ask them to help you find a lawyer (see the Legal Aid tab). 💛",
+                "Ask them to help you find a lawyer (see the Legal Aid tab). ",
                 "Write your trusted adult's phone number on paper.",
                 "Tell them what scares you. It is normal to have questions.",
             ]),
-            ("🎒 The night before", [
+            ( "The night before", [
                 "Pick out clean, comfortable clothes.",
                 "Put your pocket card and papers in your backpack.",
-                "Rest. You can hug your stuffed animal. 🧸",
+                "Rest. You can hug your stuffed animal. ",
             ]),
-            ("🏛️ On the day", [
+            ("On the day", [
                 "Arrive early with your adult. There is a security check.",
                 "Put your phone on silent.",
                 "If you don't understand, say: “I didn't understand, please.”",
@@ -593,7 +624,7 @@ CHECKLIST = {
             ]),
         ],
         "adult": [
-            ("📄 Before the hearing", [
+            ("Before the hearing", [
                 "Review the notice: date, time, address or online-hearing instructions.",
                 "Confirm case information at acis.eoir.justice.gov or 1-800-898-7180.",
                 "Contact legal aid organizations today (Legal Aid tab); waitlists fill quickly.",
@@ -601,12 +632,12 @@ CHECKLIST = {
                 "Gather documents: hearing notice, IDs, birth certificates, and contact information.",
                 "Write down the sponsor's and the legal organization's phone numbers on paper.",
             ]),
-            ("🎒 The day before", [
+            ("The day before", [
                 "Plan transportation (or test your connection if online) and request time off from work or school.",
                 "Prepare clean, neat clothes.",
                 "Print or save the pocket card.",
             ]),
-            ("🏛️ On the day of the hearing", [
+            ("On the day of the hearing", [
                 "Arrive with time to spare: there is a security screening. If online, join on time.",
                 "Silence phones.",
                 "Ask for an interpreter if you need one.",
@@ -621,7 +652,7 @@ CHECKLIST = {
 # Relief cards: strict "may qualify" hedging.
 RELIEF = [
     {
-        "icon": "🛡️", "name": X("Asilo", "Asylum"),
+        "name": X("Asilo", "Asylum"),
         "one": X("Es posible que califiques si tienes miedo de volver a tu país de origen por peligro o persecución.",
                  "You may qualify if you are afraid to return to your home country due to danger or persecution."),
         "more": S(
@@ -638,7 +669,7 @@ RELIEF = [
         ),
     },
     {
-        "icon": "👨‍👩‍👧", "name": X("Menor Inmigrante Especial (S.I.J.)", "Special Immigrant Juvenile Status (SIJ)"),
+    "name": X("Menor Inmigrante Especial (S.I.J.)", "Special Immigrant Juvenile Status (SIJ)"),
         "one": X("Es posible que califiques si tienes menos de 21 años, no estás casado/a y no puedes vivir con uno o ambos padres biológicos por maltrato, negligencia o abandono (incluye un padre desaparecido o fallecido).",
                  "You may qualify if you are under 21, unmarried, and cannot live with one or both biological parents due to abuse, neglect, or abandonment (including a missing or deceased parent)."),
         "more": S(
@@ -655,7 +686,7 @@ RELIEF = [
         ),
     },
     {
-        "icon": "🧩", "name": X("Visa U", "U-Visa"),
+        "name": X("Visa U", "U-Visa"),
         "one": X("Es posible que califiques si tú (o un padre/hermano) fue víctima de un delito grave en EE. UU. y sufrió daño físico o mental.",
                  "You may qualify if you (or a parent/sibling) were the victim of a serious crime in the U.S. and suffered physical or mental harm."),
         "more": S(
@@ -670,7 +701,7 @@ RELIEF = [
         ),
     },
     {
-        "icon": "🕊️", "name": X("Visa T", "T-Visa"),
+        "name": X("Visa T", "T-Visa"),
         "one": X("Es posible que califiques si te obligaron o engañaron para trabajar, o si fuiste víctima de trata en EE. UU.",
                  "You may qualify if you were forced or tricked into working, or were trafficked, in the U.S."),
         "more": S(
@@ -835,7 +866,7 @@ def avatar_html(role: str) -> str:
 def page_home():
     html(f"""
     <div class="hero">
-    <p class="h1">{S("¡Hola! Vamos a prepararnos juntos 💙", "Prepárese para la audiencia de inmigración", "Hi! Let's get ready together 💙", "Get ready for immigration court")}</p>
+    <p class="h1">{S("¡Hola! Vamos a prepararnos juntos", "Prepárese para la audiencia de inmigración", "Hi! Let's get ready together", "Get ready for immigration court")}</p>
     <p class="h2">{S("Aquí aprendes quién es quién, qué decir y a dónde pedir ayuda. No te pedimos tu nombre ni guardamos nada tuyo.",
                      "Guía de preparación y derechos para niños, jóvenes y sus familias. Esta herramienta no tiene formularios ni campos de texto y no guarda información personal.",
                      "Here you learn who is who, what to say, and where to ask for help. We don't ask for your name and we don't save anything about you.",
@@ -847,7 +878,7 @@ def page_home():
     # 5-working-day EOIR-33 callout
     html(f"""
     <div class="clay coral">
-    <h4>📮 {X("Si te mudas, avisa a la corte", "If you move, tell the court")}</h4>
+    <h4> {X("Si te mudas, avisa a la corte", "If you move, tell the court")}</h4>
     <p>{S("Si tú o tu familia se mudan, avisa la nueva dirección a la corte con un papel llamado <b>Formulario EOIR-33</b> (Cambio de dirección). Hazlo dentro de <b>5 días hábiles</b> para no perder las cartas de la corte.",
           "Si usted es un joven sin abogado y se muda, presente el <b>Formulario EOIR-33 (Cambio de domicilio)</b> dentro de <b>5 días hábiles</b> para no perder nunca la correspondencia de la corte.",
           "If you or your family move, tell the court your new address with a paper called <b>Form EOIR-33</b> (Change of Address). Do it within <b>5 working days</b> so you don't miss letters from the court.",
@@ -855,20 +886,20 @@ def page_home():
     </div>
     """)
 
-    html(f'<p class="sec">{X("🏛️ Mi audiencia", "🏛️ My hearing")}</p>')
+    html(f'<p class="sec">{X("Mi audiencia", "My hearing")}</p>')
     st.radio(
         "Tipo de audiencia / Hearing type",
         ["inperson", "virtual"],
-        format_func=lambda v: (("🏛️ En persona" if v == "inperson" else "💻 En línea (Webex)") if lang == "es"
-                               else ("🏛️ In person" if v == "inperson" else "💻 Online (Webex)")),
+        format_func=lambda v: (("En persona" if v == "inperson" else "💻 En línea (Webex)") if lang == "es"
+                               else (" In person" if v == "inperson" else "💻 Online (Webex)")),
         horizontal=True, label_visibility="collapsed", key="htype",
     )
 
     if st.session_state.htype == "inperson":
         st.write(S(
-            "Así se ve un salón de la corte. Toca a una persona para saber quién es. ¡Nada de esto muerde! 😊",
+            "Así se ve un salón de la corte. Toca a una persona para saber quién es. ¡Nada de esto muerde! ",
             "Distribución típica de una sala de inmigración. Toque cada rol para ver su función.",
-            "This is what a courtroom looks like. Tap a person to find out who they are. Nobody here bites! 😊",
+            "This is what a courtroom looks like. Tap a person to find out who they are. Nobody here bites! ",
             "Typical layout of an immigration courtroom. Tap each role to see what they do.",
         ))
         sel = st.session_state.role
@@ -889,17 +920,17 @@ def page_home():
         """)
         c1, c2, c3 = st.columns(3)
         with c1:
-            st.button(X("⚖️ Juez", "⚖️ Judge"), key="b_judge", on_click=set_role, args=("judge",))
+            st.button(X("Juez", " Judge"), key="b_judge", on_click=set_role, args=("judge",))
         with c2:
-            st.button(X("💼 Fiscal", "💼 Gov. Lawyer"), key="b_fiscal", on_click=set_role, args=("fiscal",))
+            st.button(X("Fiscal", "Gov. Lawyer"), key="b_fiscal", on_click=set_role, args=("fiscal",))
         with c3:
-            st.button(X("🗣️ Intérprete", "🗣️ Interpreter"), key="b_interp", on_click=set_role, args=("interprete",))
+            st.button(X("Intérprete", " Interpreter"), key="b_interp", on_click=set_role, args=("interprete",))
         if sel:
             r = ROLES[sel]
             html(avatar_html(sel))
             html(f'<div class="clay {r["css"]}"><h4>{r["title"]}</h4><p>{r["text"]}</p></div>')
         else:
-            html(f'<p class="hint">{X("👆 Toca un botón para ver quién es cada persona.", "👆 Tap a button to see who each person is.")}</p>')
+            html(f'<p class="hint">{X("Toca un botón para ver quién es cada persona.", "Tap a button to see who each person is.")}</p>')
     else:
         # Virtual / Webex guide
         st.write(S(
@@ -910,51 +941,51 @@ def page_home():
         ))
         html(f"""
         <div class="steps">
-        <div class="tile"><p class="ic">⏰</p><p class="tt">{X("Entra a tiempo", "Join on time")}</p>
+        <div class="tile"><p class="tt">{X("Entra a tiempo", "Join on time")}</p>
         <p class="tx">{S("Conéctate con tu adulto antes de que empiece.", "Ingrese a la sala virtual a tiempo, antes de la hora de inicio.", "Log in with your adult before it starts.", "Enter the virtual room on time, before the start time.")}</p></div>
-        <div class="tile"><p class="ic">📷</p><p class="tt">{X("Cámara encendida", "Camera on")}</p>
+        <div class="tile"><p class="tt">{X("Cámara encendida", "Camera on")}</p>
         <p class="tx">{S("Deja tu cámara prendida para que el juez te vea.", "Mantenga la cámara encendida durante toda la audiencia.", "Keep your camera on so the judge can see you.", "Keep your camera on for the whole hearing.")}</p></div>
-        <div class="tile"><p class="ic">🔇</p><p class="tt">{X("Micrófono en silencio", "Stay muted")}</p>
+        <div class="tile"><p class="tt">{X("Micrófono en silencio", "Stay muted")}</p>
         <p class="tx">{S("Silencia tu micrófono hasta que digan tu nombre.", "Mantenga el micrófono silenciado hasta que llamen su nombre.", "Mute your microphone until your name is called.", "Stay muted until your name is called.")}</p></div>
-        <div class="tile"><p class="ic">👔</p><p class="tt">{X("Vístete bien", "Dress neatly")}</p>
+        <div class="tile"><p class="tt">{X("Vístete bien", "Dress neatly")}</p>
         <p class="tx">{S("Ponte ropa limpia y ordenada, como para ir a la corte.", "Use ropa limpia y presentable, como si fuera en persona.", "Wear clean, neat clothes, like you're going to court.", "Wear clean, presentable clothes, as if appearing in person.")}</p></div>
         </div>
         """)
         html(f"""
-        <div class="banner teal">💡 {X(
+        <div class="banner teal"> {X(
             "Para saber cómo conectarte, revisa tu aviso de audiencia o pregunta a tu abogado u organización de ayuda legal. Si no entiendes algo, pide un intérprete. Las audiencias en línea pueden cambiar rápido: revisa tu información seguido.",
             "Para saber cómo conectarse, revise su aviso de audiencia o consulte a su abogado u organización de ayuda legal. Si no entiende algo, pida un intérprete. Las audiencias en línea pueden cambiar rápidamente: revise su información con frecuencia.") if mode == "adult" or lang == "en" else ""}
         {"" if (mode == "adult" or lang == "en") else ""}</div>
         """ if False else "")
         tip = S(
-            "Para saber cómo conectarte, mira tu aviso de la corte o pregunta a tu adulto de confianza. Si no entiendes algo, pide un intérprete. 💛",
+            "Para saber cómo conectarte, mira tu aviso de la corte o pregunta a tu adulto de confianza. Si no entiendes algo, pide un intérprete. ",
             "Para saber cómo conectarse, revise su aviso de audiencia o consulte a su abogado u organización de ayuda legal. Si no entiende algo, pida un intérprete. Las audiencias en línea pueden cambiar con rapidez: revise su información con frecuencia.",
-            "To find out how to connect, look at your court notice or ask your trusted adult. If you don't understand something, ask for an interpreter. 💛",
+            "To find out how to connect, look at your court notice or ask your trusted adult. If you don't understand something, ask for an interpreter. ",
             "To find out how to connect, review your hearing notice or ask your lawyer or legal aid organization. If you don't understand something, ask for an interpreter. Online hearings can change quickly: check your information often.",
         )
-        html(f'<div class="banner teal">💡 {tip}</div>')
+        html(f'<div class="banner teal"> {tip}</div>')
 
     # No lawyer? point to the script
     html(f"""
     <div class="clay mint">
     <h4>🗣️ {X("¿No tienes abogado?", "No lawyer yet?")}</h4>
-    <p>{S("Toca el botón redondo de abajo para ver las palabras que puedes decirle al juez. Ya están escritas para ti. 💛",
+    <p>{S("Toca el botón redondo de abajo para ver las palabras que puedes decirle al juez. Ya están escritas para ti. ",
           "Si el menor comparece sin abogado, el botón central (Guión de Corte) tiene el texto para pedir más tiempo, con audio y pronunciación.",
-          "Tap the round button below to see the words you can say to the judge. They are already written for you. 💛",
+          "Tap the round button below to see the words you can say to the judge. They are already written for you. ",
           "If the minor appears without a lawyer, the center button (Court Script) has the text to ask for more time, with audio and pronunciation.")}</p>
     </div>
     """)
 
     # Checklist
-    with st.expander(X("📋 Mi lista para el día de la audiencia", "📋 My day-of-hearing checklist"), expanded=False):
+    with st.expander(X("Mi lista para el día de la audiencia", "My day-of-hearing checklist"), expanded=False):
         st.caption(S(
-            "Toca cada casilla cuando termines un paso. ¡Vas muy bien! 🌟",
+            "Toca cada casilla cuando termines un paso. ¡Vas muy bien!",
             "Marque cada casilla al completar un paso. Las casillas solo se ven en su pantalla y no se guardan.",
-            "Tap each box when you finish a step. You're doing great! 🌟",
+            "Tap each box when you finish a step. You're doing great!",
             "Check each box as you complete a step. The boxes only appear on your screen and are not saved.",
         ))
         html(f"""
-        <div class="banner">⚠️ <b>{X("Muy importante:", "Very important:")}</b>
+        <div class="banner"><b>{X("Muy importante:", "Very important:")}</b>
         {S("Es muy importante ir a todas tus citas. Si no vas, el juez puede decidir sin escucharte. Si no puedes ir, díselo YA a tu adulto de confianza o a tu abogado.",
            "Es fundamental asistir a todas las audiencias. Si no se presenta, el juez puede ordenar la deportación sin escucharle (orden «en ausencia»). Si no puede asistir, contacte a su abogado de inmediato.",
            "It is very important to go to every court date. If you don't go, the judge can decide without hearing you. If you can't go, tell your trusted adult or your lawyer RIGHT AWAY.",
@@ -972,14 +1003,21 @@ def page_home():
 def page_qa():
     html(f"""
     <div class="hero">
-    <p class="h1">💬 {X("Preguntas comunes", "Common questions")}</p>
+    <p class="h1"> {X("Preguntas comunes", "Common questions")}</p>
     <p class="h2">{X("10 preguntas escritas y revisadas con anticipación. Aquí no hay chat abierto: nada se inventa en el momento y no hay cuadros para escribir.",
                      "10 pre-written, pre-reviewed questions. There is no open chat here: nothing is made up on the spot and there are no boxes to type in.")}</p>
     </div>
     """)
     banner()
-    html(f'<div class="banner teal">🔒 {X("Cada respuesta pasa una verificación automática antes de mostrarse: sin consejos legales ni promesas, con referencia a un abogado y con aviso educativo.", "Every answer passes an automatic check before it is shown: no legal advice or promises, a referral to a lawyer, and an educational notice.")}</div>')
-
+    html(f'<div class="banner teal"> {X("Cada respuesta pasa una verificación automática antes de mostrarse: sin consejos legales ni promesas, con referencia a un abogado y con aviso educativo.", "Every answer passes an automatic check before it is shown: no legal advice or promises, a referral to a lawyer, and an educational notice.")}</div>')
+    html(f"""
+<div style="background:#e1f7f5; border:1px solid #9be3dc; color:#125e58; border-radius:16px; padding:12px 14px; font-size:0.82rem; line-height:1.45; font-weight:600; margin-bottom:12px;">
+  {X(
+    "<strong>Banco de preguntas en expansión activa:</strong> Estamos agregando continuamente nuevas preguntas verificadas y módulos multilingües (español, inglés, vietnamita, chino, k'iche' y mam) con revisión de expertos legales.",
+    "<strong>Actively expanding question bank:</strong> We are continuously adding newly verified questions and multilingual modules (Spanish, English, Vietnamese, Chinese, K'iche', and Mam) with legal-expert review."
+  )}
+</div>
+""")
     passed_count = 0
     for n, item in enumerate(QA_BANK, start=1):
         i_lang = 0 if lang == "es" else 1
@@ -999,7 +1037,7 @@ def page_qa():
 def page_relief():
     html(f"""
     <div class="hero">
-    <p class="h1">🌱 {X("Opciones de alivio comunes", "Common relief options")}</p>
+    <p class="h1"> {X("Opciones de alivio comunes", "Common relief options")}</p>
     <p class="h2">{S("Hay protecciones que a veces ayudan a niños y jóvenes. Toca una tarjeta para leer más. Un abogado puede decirte si alguna te podría servir.",
                      "Estas son algunas protecciones comunes. Cada una tiene más requisitos y excepciones. Esta información no es asesoría legal: solo un abogado puede evaluar su caso.",
                      "There are protections that sometimes help kids and teens. Tap a card to read more. A lawyer can tell you if one may fit you.",
@@ -1013,7 +1051,7 @@ def page_relief():
             st.write(r["more"])
     html(f"""
     <div class="clay ind">
-    <h4>👩‍⚖️ {X("Habla con un abogado", "Talk to a lawyer")}</h4>
+    <h4> {X("Habla con un abogado", "Talk to a lawyer")}</h4>
     <p>{X("Las reglas de edad y los requisitos dependen de cada persona. Llama a ayuda legal el mismo día; las listas de espera se llenan rápido.",
           "Age rules and requirements depend on each person. Call legal aid the same day; waitlists fill quickly.")}</p>
     </div>
@@ -1027,41 +1065,41 @@ def page_relief():
 def page_aid():
     html(f"""
     <div class="hero">
-    <p class="h1">🤝 {X("Ayuda legal en Texas", "Texas legal aid")}</p>
-    <p class="h2">{S("Hay personas buenas cuyo trabajo es ayudar a niños y jóvenes como tú. Pídele a un adulto de confianza que te ayude a llamar. 💛",
+    <p class="h1"> {X("Ayuda legal en Texas", "Texas legal aid")}</p>
+    <p class="h2">{S("Hay personas buenas cuyo trabajo es ayudar a niños y jóvenes como tú. Pídele a un adulto de confianza que te ayude a llamar. ",
                      "Presione los botones para llamar directamente. Confirme disponibilidad y requisitos al llamar.",
-                     "There are good people whose job is to help kids and teens like you. Ask a trusted adult to help you call. 💛",
+                     "There are good people whose job is to help kids and teens like you. Ask a trusted adult to help you call. ",
                      "Press the buttons to call directly. Confirm availability and eligibility when you call.")}</p>
     </div>
     """)
     html(f"""
-    <div class="banner">⏳ <b>{X("Aviso de capacidad:", "Capacity warning:")}</b>
+    <div class="banner"> <b>{X("Aviso de capacidad:", "Capacity warning:")}</b>
     {X("Las listas de espera de las organizaciones sin fines de lucro se llenan rápido por falta de fondos, y algunas han tenido que dejar de representar a menores. Llame hoy, llame a más de una organización y siga intentando. No espere: también puede pedirle más tiempo al juez en su audiencia.",
        "Nonprofit waitlists fill quickly because of funding limits, and some organizations have had to stop representing minors. Call today, call more than one organization, and keep trying. Don't wait: you can also ask the judge for more time at your hearing.")}</div>
     """)
     banner()
 
-    html('<p class="sec">📍 Lobos Immigration Project</p>')
+    html('<p class="sec"> Lobos Immigration Project</p>')
     st.link_button(X("📞 Llamar a Lobos (512-409-5263)", "📞 Call Lobos (512-409-5263)"), "tel:5124095263")
     st.caption(X("Recurso en Texas para jóvenes migrantes. Llame para saber si puede ayudarle con su caso.",
                  "Texas resource for young migrants. Call to find out if they may be able to help with your case."))
 
-    html('<p class="sec">⚖️ KIND</p>')
+    html('<p class="sec"> KIND</p>')
     st.link_button(X("📞 Llamar a KIND (832-779-4340)", "📞 Call KIND (832-779-4340)"), "tel:8327794340")
     st.caption(X("Ayuda legal para niños no acompañados con casos de inmigración.", "Legal help for unaccompanied children with immigration cases."))
 
-    html('<p class="sec">✊ FIEL Houston</p>')
-    st.link_button(X("📞 Llamar a FIEL (713-364-3435)", "📞 Call FIEL (713-364-3435)"), "tel:7133643435")
+    html('<p class="sec"> FIEL Houston</p>')
+    st.link_button(X("📞 Llamar a FIEL (713-364-3435)", " Call FIEL (713-364-3435)"), "tel:7133643435")
     st.caption(X("Organización comunitaria liderada por inmigrantes: orientación familiar y defensa de derechos.",
                  "Immigrant-led community organization: family guidance and rights advocacy."))
 
-    html('<p class="sec">🛡️ RAICES Texas</p>')
-    st.link_button(X("📞 Llamar a RAICES (210-222-0960)", "📞 Call RAICES (210-222-0960)"), "tel:2102220960")
+    html('<p class="sec"> RAICES Texas</p>')
+    st.link_button(X("📞 Llamar a RAICES (210-222-0960)", " Call RAICES (210-222-0960)"), "tel:2102220960")
     st.caption(X("Servicios legales y de representación migratoria en Texas.", "Legal services and immigration representation across Texas."))
 
     html(f"""
     <div class="clay ind">
-    <h4>📝 {X("Qué decir cuando llames", "What to say when you call")}</h4>
+    <h4> {X("Qué decir cuando llames", "What to say when you call")}</h4>
     <p>• {X("Tu nombre completo y tu edad exacta.", "Your full name and exact age.")}<br>
     • {X("Tu «Número A» (9 dígitos, empieza con A) si lo tienes en tus papeles.", "Your 9-digit “A-Number” (starts with A) if it's on your papers.")}<br>
     • {X("La fecha, la hora y la ciudad de tu próxima audiencia.", "The date, time, and city of your next hearing.")}<br>
@@ -1069,7 +1107,7 @@ def page_aid():
     </div>
     """)
 
-    html('<p class="sec">🔎 ' + X("Más ayuda", "More help") + '</p>')
+    html('<p class="sec"> ' + X("Más ayuda", "More help") + '</p>')
     st.link_button(X("Directorio nacional de servicios legales", "National legal services directory"), "https://www.immigrationadvocates.org/legaldirectory/")
     st.link_button(X("Lista oficial de abogados pro bono (EOIR)", "Official pro bono legal service providers (EOIR)"), "https://www.justice.gov/eoir/list-pro-bono-legal-service-providers")
     st.link_button(X("Info de tu caso · 1-800-898-7180", "Case information · 1-800-898-7180"), "tel:18008987180")
@@ -1083,10 +1121,10 @@ def page_aid():
 def page_script():
     html(f"""
     <div class="hero">
-    <p class="h1">🗣️ {X("Guión de Corte", "Court Script")}</p>
-    <p class="h2">{S("Si el juez te llama y no tienes abogado, puedes leer estas palabras en voz alta. Practica con el audio. 💛",
+    <p class="h1"> {X("Guión de Corte", "Court Script")}</p>
+    <p class="h2">{S("Si el juez te llama y no tienes abogado, puedes leer estas palabras en voz alta. Practica con el audio. ",
                      "Si el menor comparece sin abogado, puede leer este texto al juez o mostrarlo en pantalla. Pedir tiempo para conseguir representación es una petición común.",
-                     "If the judge calls you and you don't have a lawyer, you can read these words out loud. Practice with the audio. 💛",
+                     "If the judge calls you and you don't have a lawyer, you can read these words out loud. Practice with the audio. ",
                      "If the minor appears without a lawyer, they can read this text to the judge or show it on screen. Asking for time to find representation is a common request.")}</p>
     </div>
     """)
@@ -1094,8 +1132,8 @@ def page_script():
 
     html(f"""
     <div class="phrase g-ind">
-    <p class="icon">⏳</p>
-    <p class="tag">🇺🇸 {X("LEE ESTO AL JUEZ", "READ THIS ALOUD TO THE JUDGE")}</p>
+    <p class="icon"></p>
+    <p class="tag"> {X("LEE ESTO AL JUEZ", "READ THIS ALOUD TO THE JUDGE")}</p>
     <p class="big">“{CONT_EN}”</p>
     </div>
     """)
@@ -1104,17 +1142,17 @@ def page_script():
 
     html(f"""
     <div class="clay coral">
-    <h4>⏱️ {X("¿Cuánto tiempo me pueden dar?", "How much time might I get?")}</h4>
+    <h4> {X("¿Cuánto tiempo me pueden dar?", "How much time might I get?")}</h4>
     <p>{S("El juez decide. Muchas veces dan de <b>10 a 28 días</b>, como 2 semanas. No es seguro. Por eso, <b>llama a ayuda legal el mismo día</b> y nunca faltes a tu cita.",
           "Con la práctica actual, un aplazamiento suele ser de <b>10 a 28 días</b> (unas 2 semanas). La decisión es del juez y no está garantizada. <b>Llame a ayuda legal ese mismo día</b> y no falte a ninguna audiencia.",
           "The judge decides. Often it is <b>10 to 28 days</b>, about 2 weeks. It is not certain. So <b>call legal aid the very same day</b> and never skip your court date.",
           "Under current practice, a continuance is often <b>10 to 28 days</b> (about 2 weeks). The judge decides and it is not guaranteed. <b>Call legal aid the very same day</b> and do not miss any hearing.")}</p>
     </div>
     """)
-    st.button(X("📞 Ir a ayuda legal", "📞 Go to legal aid"), key="script_to_aid", on_click=go, args=("aid",))
+    st.button(X(" Ir a ayuda legal", " Go to legal aid"), key="script_to_aid", on_click=go, args=("aid",))
 
-    html(f'<p class="sec">📣 {X("Otras frases importantes", "Other important phrases")}</p>')
-    html(f'<p class="note">{S("Si un oficial te hace preguntas y tienes miedo, respira despacio. Puedes mostrar estas tarjetas sin decir nada más. 💙", "Si un agente le detiene, mantenga la calma y muestre estas tarjetas. Hable lo mínimo. No mienta ni muestre documentos falsos.", "If an officer asks you questions and you feel scared, breathe slowly. You can show these cards without saying anything else. 💙", "If an agent stops you, stay calm and show these cards. Say as little as possible. Do not lie or show false documents.")}</p>')
+    html(f'<p class="sec"> {X("Otras frases importantes", "Other important phrases")}</p>')
+    html(f'<p class="note">{S("Si un oficial te hace preguntas y tienes miedo, respira despacio. Puedes mostrar estas tarjetas sin decir nada más. 💙", "Si un agente le detiene, mantenga la calma y muestre estas tarjetas. Hable lo mínimo. No mienta ni muestre documentos falsos.", "If an officer asks you questions and you feel scared, breathe slowly. You can show these cards without saying anything else. ", "If an agent stops you, stay calm and show these cards. Say as little as possible. Do not lie or show false documents.")}</p>')
     for p in PHRASES:
         html(f"""
         <div class="phrase {p['g']}">
@@ -1177,13 +1215,13 @@ html(f"""
 with st.container(key="dock"):
     cols = st.columns([1, 1, 1.15, 1, 1])
     with cols[0]:
-        st.button(f"🏠\n\n{X('Inicio', 'Home')}", key="nav_home", on_click=go, args=("home",))
+        st.button(f"\n\n{X('Inicio', 'Home')}", key="nav_home", on_click=go, args=("home",))
     with cols[1]:
-        st.button(f"💬\n\n{X('Preguntas', 'Q&A')}", key="nav_qa", on_click=go, args=("qa",))
+        st.button(f"\n\n{X('Preguntas', 'Q&A')}", key="nav_qa", on_click=go, args=("qa",))
     with cols[2]:
         st.button("🗣️", key="nav_center", on_click=go, args=("script",),
                   help=X("Guión de Corte y audio", "Court Script & audio coach"))
     with cols[3]:
-        st.button(f"🌱\n\n{X('Alivio', 'Relief')}", key="nav_relief", on_click=go, args=("relief",))
+        st.button(f"\n\n{X('Alivio', 'Relief')}", key="nav_relief", on_click=go, args=("relief",))
     with cols[4]:
-        st.button(f"🤝\n\n{X('Ayuda', 'Legal Aid')}", key="nav_aid", on_click=go, args=("aid",))
+        st.button(f"\n\n{X('Ayuda', 'Legal Aid')}", key="nav_aid", on_click=go, args=("aid",))
