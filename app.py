@@ -298,7 +298,7 @@ div[role="radiogroup"] p {font-weight: 800; font-size: 13.5px; margin: 0; white-
   box-shadow: 0 0 0 5px rgba(92,225,230,0.28), 0 12px 24px rgba(56,178,172,0.6), inset 0 3px 6px rgba(255,255,255,0.75), inset 0 -4px 8px rgba(0,0,0,0.14) !important;
 }
 .st-key-nav_center button p, .st-key-nav_center [data-testid^="baseButton"] p {
-  font-size: 26px !important; line-height: 1 !important; color: #ffffff !important; margin: 0 !important;
+  font-size: 35px !important; line-height: 1 !important; color: #ffffff !important; margin: 0 !important;
 }
 
 @media print {
