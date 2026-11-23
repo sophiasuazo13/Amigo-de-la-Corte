@@ -272,13 +272,19 @@ div[role="radiogroup"] p {font-weight: 800; font-size: 13.5px; margin: 0; white-
 .iv-circle .hs-dot {position:absolute; left:64px; top:80px; width:8px; height:8px; border-radius:50%; background:#FF9F68;}
 
 /* ---------- floating bottom dock ---------- */
-.st-key-dock {
-  position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); z-index: 9999;
-  width: min(480px, calc(100% - 16px)); box-sizing: border-box; padding: 8px 6px 8px 6px;
-  background: linear-gradient(135deg, #9B8AFB, #6A4DE0 70%, #5B43E6); border-radius: 30px;
-  box-shadow: 0 -4px 24px rgba(123,97,255,0.25), 0 18px 36px rgba(91,67,230,0.45), inset 0 3px 5px rgba(255,255,255,0.45), inset 0 -5px 8px rgba(40,20,140,0.35);
-  backdrop-filter: blur(10px); overflow: visible !important;
+.st-key-dock .stButton > button {
+  background: transparent !important; border: none !important; box-shadow: none !important; color:#ffffff !important;
+  padding: 8px 4px !important; min-height: 0 !important; border-radius: 18px !important; font-size: 13px !important; line-height: 1.2 !important; width: 100%;
 }
+.st-key-dock .stButton > button p {margin: 0 !important; color:#ffffff !important; font-weight: 800 !important; font-size: 13px !important; white-space: nowrap !important;}
+.st-key-dock .stButton > button:hover {transform:none; background: rgba(255,255,255,0.14) !important;}
+.st-key-nav_center .stButton > button {
+  width: 64px !important; height: 64px !important; border-radius: 50% !important; margin-top: -28px !important; padding: 0 !important;
+  background: linear-gradient(135deg, #5CE1E6, #38B2AC) !important; color: #ffffff !important; border: none !important; outline: none !important;
+  box-shadow: 0 0 0 5px rgba(92,225,230,0.28), 0 12px 24px rgba(56,178,172,0.6), inset 0 3px 6px rgba(255,255,255,0.75), inset 0 -4px 8px rgba(0,0,0,0.14) !important;
+}
+.st-key-nav_center .stButton > button p {font-size: 13.5px !important; color: #ffffff !important; font-weight: 900 !important;}
+
 @media (max-width: 600px) {
   .st-key-dock {bottom: 0; width: 100%; border-radius: 26px 26px 0 0; padding-bottom: calc(8px + env(safe-area-inset-bottom));}
 }
@@ -1056,7 +1062,7 @@ def page_relief():
           "Age rules and requirements depend on each person. Call legal aid the same day; waitlists fill quickly.")}</p>
     </div>
     """)
-    st.button(X("📞 Ver organizaciones de ayuda", "📞 See legal aid organizations"), key="relief_to_aid", on_click=go, args=("aid",))
+    st.button(X(" Ver organizaciones de ayuda", " See legal aid organizations"), key="relief_to_aid", on_click=go, args=("aid",))
 
 
 # ==================================================================
@@ -1164,7 +1170,7 @@ def page_script():
         html(f'<p class="note">{p["note"]}</p>')
 
     # Pocket card (print / screenshot)
-    html(f'<p class="sec">🖨️ {X("Tarjeta de bolsillo", "Pocket card")}</p>')
+    html(f'<p class="sec"> {X("Tarjeta de bolsillo", "Pocket card")}</p>')
     st.write(X("Toma una captura de pantalla de esta tarjeta o imprime esta página. Guarda el papel en tu bolsillo por si te quitan el celular:",
                "Take a screenshot of this card or print this page. Keep the paper in your pocket in case your phone is taken:"))
     banner()
@@ -1202,7 +1208,7 @@ PAGES.get(st.session_state.page, page_home)()
 
 html(f"""
 <hr style="border:none;border-top:1px solid #DAD8F5;margin:26px 0 8px 0;">
-<p style="font-size:12px;color:#5B5F7E;line-height:1.5;">🔒 {X(
+<p style="font-size:12px;color:#5B5F7E;line-height:1.5;"> {X(
     "Privacidad: esta app no tiene formularios, cuentas, cookies propias ni análisis, y no guarda tu nombre ni información personal. Como cualquier sitio web, el servicio de hospedaje puede registrar datos técnicos básicos de conexión; esta app no los ve ni los usa. El audio usa la voz de tu propio navegador.",
     "Privacy: this app has no forms, accounts, cookies of its own, or analytics, and it does not store your name or personal information. Like any website, the hosting service may log basic technical connection data; this app does not see or use it. Audio uses your own browser's voice.")}
 <br>{DISCLAIMER_BANNER}</p>
