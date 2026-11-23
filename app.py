@@ -446,14 +446,14 @@ def audio_coach(text_en: str, phonetic_es: str):
 ROLES = {
     "judge": {
         "css": "ind",
-        "title": X("⚖️ El Juez", "⚖️ The Judge"),
+        "title": X("El Juez", "The Judge"),
         "text": S(
             "El juez es una persona que escucha con atención para decidir qué es lo mejor. No es tu enemigo y no está ahí para asustarte. "
-            "Si no entiendes algo, puedes decir: «No entendí, ¿me lo puede explicar otra vez?». Dile «Su Señoría» y cuéntale la verdad con calma. 💙",
+            "Si no entiendes algo, puedes decir: «No entendí, ¿me lo puede explicar otra vez?». Dile «Su Señoría» y cuéntale la verdad con calma. ",
             "El juez de inmigración decide si la persona puede permanecer legalmente en Estados Unidos. Trabaja para el Departamento de Justicia (EOIR), no para ICE. "
             "Diríjase a él como «Su Señoría» (Your Honor), responda con la verdad y pida aclaración si no entiende una pregunta.",
             "The judge is a person who listens carefully to decide what is best. They are not your enemy and they are not there to scare you. "
-            "If you don't understand something, you can say: “I didn't understand. Can you explain it again, please?” Say “Your Honor” and tell the truth calmly. 💙",
+            "If you don't understand something, you can say: “I didn't understand. Can you explain it again, please?” Say “Your Honor” and tell the truth calmly. ",
             "The immigration judge decides whether a person may legally remain in the United States. The judge works for the Department of Justice (EOIR), not for ICE. "
             "Address the judge as “Your Honor,” answer truthfully, and ask for clarification if you do not understand a question.",
         ),
@@ -1046,7 +1046,7 @@ def page_relief():
     """)
     banner()
     for r in RELIEF:
-        with st.expander(f"{r['icon']}  {r['name']}"):
+        with st.expander(r["name"]):
             html(f'<div class="banner teal"><b>{X("Es posible que califiques:", "You may qualify:")}</b><br>{r["one"]}</div>')
             st.write(r["more"])
     html(f"""
@@ -1156,7 +1156,6 @@ def page_script():
     for p in PHRASES:
         html(f"""
         <div class="phrase {p['g']}">
-        <p class="icon">{p['icon']}</p>
         <p class="tag">{p['tag']}</p>
         <p class="big">“{p['en']}”</p>
         </div>
@@ -1213,15 +1212,16 @@ html(f"""
 # FLOATING BOTTOM DOCK (app-style tab bar)
 # ------------------------------------------------------------------
 with st.container(key="dock"):
-    cols = st.columns([1, 1, 1.15, 1, 1])
+    cols = st.columns([1.0, 1.35, 0.95, 1.0, 1.0])
     with cols[0]:
-        st.button(f"\n\n{X('Inicio', 'Home')}", key="nav_home", on_click=go, args=("home",))
+        st.button(X("Inicio", "Home"), key="nav_home", on_click=go, args=("home",))
     with cols[1]:
-        st.button(f"\n\n{X('Preguntas', 'Q&A')}", key="nav_qa", on_click=go, args=("qa",))
+        st.button(X("Preguntas", "Q&A"), key="nav_qa", on_click=go, args=("qa",))
     with cols[2]:
-        st.button("🗣️", key="nav_center", on_click=go, args=("script",),
+        st.button(X("Guión", "Script"), key="nav_center", on_click=go, args=("script",),
                   help=X("Guión de Corte y audio", "Court Script & audio coach"))
     with cols[3]:
-        st.button(f"\n\n{X('Alivio', 'Relief')}", key="nav_relief", on_click=go, args=("relief",))
+        st.button(X("Alivio", "Relief"), key="nav_relief", on_click=go, args=("relief",))
     with cols[4]:
-        st.button(f"\n\n{X('Ayuda', 'Legal Aid')}", key="nav_aid", on_click=go, args=("aid",))
+        st.button(X("Ayuda", "Aid"), key="nav_aid", on_click=go, args=("aid",))
+
