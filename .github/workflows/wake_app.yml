@@ -1,0 +1,28 @@
+name: Keep Streamlit App Awake
+on:
+  schedule:
+    - cron: '0 */8 * * *'
+  workflow_dispatch:
+
+jobs:
+  wake-app:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Open Streamlit App in Headless Browser
+        run: |
+          npx playwright install chromium
+          node -e '
+            const { chromium } = require("playwright");
+            (async () => {
+              const browser = await chromium.launch();
+              const page = await browser.newPage();
+              await page.goto("https://streamlit.app", { waitUntil: "networkidle", timeout: 60000 });
+              const wakeBtn = await page.$("button:has-text(\"Yes, get this app back up\")");
+              if (wakeBtn) {
+                await wakeBtn.click();
+                await page.waitForTimeout(15000);
+              }
+              await page.waitForTimeout(5000);
+              await browser.close();
+            })();
+          '
